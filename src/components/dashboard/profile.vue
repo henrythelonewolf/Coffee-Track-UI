@@ -1,9 +1,9 @@
 <template>
-    <h1>Bar</h1>
+  <div><h1>prof</h1></div>
 </template>
 
 <script>
 export default {
-    name: 'Bar'
+  name: 'Profile'
 }
 </script>
