@@ -51,19 +51,14 @@ router.beforeEach((to, from, next) => {
 
   if (isAuthenticated() == true && loginPaths.includes(to.path) == true) {
     next({path: '/dashboard/overview'});
-    // console.log('first');
     return;
   }
-
-  // console.log('second');
 
   if (isAuthenticated() == false && loginPaths.includes(to.path) == false) {
     next({path: '/'});
-    // console.log('third');
     return;
   }
   
-  // console.log('fourth');
   next();
 });
 

@@ -1,20 +1,20 @@
 import api from './api.service';
+import jwt from 'jsonwebtoken';
 
 const isAuthenticated = () => (
-  localStorage.getItem('user') !== null &&
   localStorage.getItem('accessToken') !== null
 );
 
 const isAdmin = () => {
-  const json = localStorage.getItem('user');
-  const user = JSON.parse(json);
-  return user.role === 'admin';
+  const token = localStorage.getItem('accessToken');
+  const payload = jwt.decode(token);
+  return payload.role === 'admin';
 }
 
 const isUser = () => {
-  const json = localStorage.getItem('user');
-  const user = JSON.parse(json);
-  return user.role === 'user';
+  const token = localStorage.getItem('accessToken');
+  const payload = jwt.decode(token);
+  return payload.role === 'user';
 }
 
 const authenticate = async (payload) => {
@@ -31,14 +31,12 @@ const authenticate = async (payload) => {
   }
 }
 
-const authorize = ({accessToken, user}) => {
+const authorize = ({accessToken}) => {
   localStorage.setItem('accessToken', accessToken);
-  localStorage.setItem('user', JSON.stringify(user));
 }
 
 const deauthorize = () => {
   localStorage.removeItem('accessToken');
-  localStorage.removeItem('user');
 }
 
 export { authenticate, isAuthenticated, deauthorize, authorize, isAdmin, isUser }
