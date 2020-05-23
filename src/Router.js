@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import { default as Router, default as VueRouter } from 'vue-router';
 import Dashboard from './components/dashboard';
-import Profile from './components/dashboard/profile';
+import Account from './components/dashboard/account/account';
 import Overview from './components/dashboard/overview';
 import Landing from './components/landing';
+import CreateCoffee from './components/dashboard/coffee/create_coffee';
 import { isAuthenticated } from './services/authorization.service';
 
 Vue.use(Router);
@@ -25,9 +26,14 @@ const routes = [
         component: Overview
       },
       {
-        path: '/dashboard/profile',
-        name: 'Profile',
-        component: Profile
+        path: '/dashboard/account',
+        name: 'Account',
+        component: Account
+      },
+      {
+        path: '/dashboard/create-coffee',
+        name: 'Create Coffee',
+        component: CreateCoffee
       }
     ]
   }

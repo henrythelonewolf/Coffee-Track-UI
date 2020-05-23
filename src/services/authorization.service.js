@@ -1,4 +1,4 @@
-import api from './api.service';
+import authApi from './auth_api.service';
 import jwt from 'jsonwebtoken';
 
 const isAuthenticated = () => (
@@ -20,10 +20,11 @@ const isUser = () => {
 const authenticate = async (payload) => {
   const { email, password } = payload;
   try {
-    const resp = await api.post('/api/authorization/login', {
+    const resp = await authApi.post('/api/authorization/login', {
       email,
       password
-    });
+    }, {withCredentials: true});
+    console.log(resp);
     return resp.data;
   } catch (err) {
     console.log(err);
