@@ -4,7 +4,8 @@ import Dashboard from './components/dashboard';
 import Account from './components/dashboard/account/account';
 import Overview from './components/dashboard/overview';
 import Landing from './components/landing';
-import CreateCoffee from './components/dashboard/coffee/create_coffee';
+import Recipe from './components/dashboard/recipe/recipe';
+import CreateRecipe from './components/dashboard/recipe/create-recipe';
 import { isAuthenticated } from './services/authorization.service';
 
 Vue.use(Router);
@@ -31,9 +32,14 @@ const routes = [
         component: Account
       },
       {
-        path: '/dashboard/create-coffee',
-        name: 'Create Coffee',
-        component: CreateCoffee
+        path: '/dashboard/recipe',
+        name: 'Recipe',
+        component: Recipe
+      },
+      {
+        path: '/dashboard/recipe/create',
+        name: 'Create Recipe',
+        component: CreateRecipe
       }
     ]
   }

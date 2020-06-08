@@ -1,4 +1,4 @@
-import authApi from './auth_api.service';
+import api from './api.service';
 import jwt from 'jsonwebtoken';
 
 const isAuthenticated = () => (
@@ -17,12 +17,19 @@ const isUser = () => {
   return payload.role === 'user';
 }
 
+const getToken = () => {
+  const token = localStorage.getItem('accessToken');
+  return token;
+}
+
 const authenticate = async (payload) => {
   const { email, password } = payload;
   try {
-    const resp = await authApi.post('/api/authorization/login', {
-      email,
-      password
+    const resp = await api.post('/api/session', {
+      user: {
+        email,
+        password
+      }
     }, {withCredentials: true});
     console.log(resp);
     return resp.data;
@@ -40,4 +47,4 @@ const deauthorize = () => {
   localStorage.removeItem('accessToken');
 }
 
-export { authenticate, isAuthenticated, deauthorize, authorize, isAdmin, isUser }
+export { authenticate, isAuthenticated, getToken, deauthorize, authorize, isAdmin, isUser }
